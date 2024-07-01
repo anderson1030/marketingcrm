@@ -34,7 +34,7 @@ const authUser = async (req, res, { user, databasePassword, password, UserPasswo
         maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null,
         sameSite: 'Lax',
         httpOnly: true,
-        secure: false,
+        secure: req.secure,
         domain: req.hostname,
         path: '/',
         Partitioned: true,
