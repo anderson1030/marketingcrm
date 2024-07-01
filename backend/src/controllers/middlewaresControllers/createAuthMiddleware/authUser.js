@@ -35,9 +35,9 @@ const authUser = async (req, res, { user, databasePassword, password, UserPasswo
         sameSite: 'Lax',
         httpOnly: true,
         secure: req.secure,
-        domain: req.hostname,
+        // domain: req.hostname,
         path: '/',
-        Partitioned: true,
+        // Partitioned: true,
       })
       .json({
         success: true,
