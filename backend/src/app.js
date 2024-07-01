@@ -19,40 +19,41 @@ const fileUpload = require('express-fileupload');
 const app = express();
 
 // Enable CORS
-const whitelist = [
-  'http://crm.marketingpro.com.hk',
-  'https://crm.marketingpro.com.hk',
-  'http://localhost:5173',
-  'http://localhost:5174',
-  'http://localhost:3001/',
-  'http://localhost:3000/',
-  'http://localhost:3000',
-  'localhost:5173',
-  'localhost:5174',
-  'localhost:3000',
-];
+// const whitelist = [
+//   'http://crm.marketingpro.com.hk',
+//   'https://crm.marketingpro.com.hk',
+//   'http://localhost:5173',
+//   'http://localhost:5174',
+//   'http://localhost:3001/',
+//   'http://localhost:3000/',
+//   'http://localhost:3000',
+//   'localhost:5173',
+//   'localhost:5174',
+//   'localhost:3000',
+// ];
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      // console.log(origin);
-      callback(new Error('Please Contact Admin!'));
-    }
-  },
-  credentials: true,
-};
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.includes(origin) || !origin) {
+//       callback(null, true);
+//     } else {
+//       // console.log(origin);
+//       callback(new Error('Please Contact Admin!'));
+//     }
+//   },
+//   credentials: true,
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
-// app.use(
-//   cors({
-//     origin: true,
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 
+app.set('trust proxy', true);
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

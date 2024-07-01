@@ -52,7 +52,7 @@ router
 //router.route('/setting/delete/:id).delete(hasPermission(),catchErrors(settingController.delete));
 router.route('/setting/search').get(hasPermission(), catchErrors(settingController.search));
 router.route('/setting/list').get(hasPermission(), catchErrors(settingController.list));
-router.route('/setting/listAll'), catchErrors(settingController.listAll);
+router.route('/setting/listAll').get(hasPermission('read'), catchErrors(settingController.listAll));
 router.route('/setting/filter').get(hasPermission(), catchErrors(settingController.filter));
 router
   .route('/setting/readBySettingKey/:settingKey')
