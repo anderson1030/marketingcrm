@@ -17,6 +17,7 @@ const login = async (req, res, { userModel }) => {
   const UserModel = mongoose.model(userModel);
   const { email, password } = req.body;
 
+  console.log(req.body);
   // validate
   const objectSchema = Joi.object({
     email: Joi.string()
