@@ -25,6 +25,8 @@ const whitelist = [
   'http://localhost:5173',
   'http://localhost:5174',
   'http://localhost:3001/',
+  'http://localhost:3000/',
+  'http://localhost:3000',
   'localhost:5173',
   'localhost:5174',
   'localhost:3000',
@@ -39,8 +41,6 @@ const corsOptions = {
       callback(new Error('Please Contact Admin!'));
     }
   },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 };
 
