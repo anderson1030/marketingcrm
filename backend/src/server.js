@@ -1,3 +1,5 @@
+const https = require('https');
+const fs = require('fs');
 require('module-alias/register');
 const mongoose = require('mongoose');
 const { globSync } = require('glob');
@@ -6,7 +8,7 @@ const path = require('path');
 // Make sure we are running node 7.6+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
 if (major < 20) {
-  console.log('Please upgrade your node.js version at least 20 or greater. 👌\n ');
+  console.log('Please upgrade your node.js version to at least 20 or greater. 👌\n ');
   process.exit();
 }
 
@@ -20,7 +22,7 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 mongoose.connection.on('error', (error) => {
   console.log(
-    `1. 🔥 Common Error caused issue → : check your .env file first and add your mongodb url`
+    `1. 🔥 Common Error caused issue → : check your .env file first and add your MongoDB URL`
   );
   console.error(`2. 🚫 Error → : ${error.message}`);
 });
@@ -34,6 +36,13 @@ for (const filePath of modelsFiles) {
 // Start our app!
 const app = require('./app');
 app.set('port', process.env.PORT || 8888);
-const server = app.listen(app.get('port'), () => {
+
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/crm.marketingpro.com.hk/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/crm.marketingpro.com.hk/fullchain.pem'),
+};
+
+const server = https.createServer(options, app);
+server.listen(app.get('port'), () => {
   console.log(`Express running → On PORT : ${server.address().port}`);
 });
