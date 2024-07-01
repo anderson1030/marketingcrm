@@ -21,6 +21,7 @@ const app = express();
 // Enable CORS
 const whitelist = [
   'http://crm.marketingpro.com.hk',
+  'https://crm.marketingpro.com.hk',
   'http://localhost:5173',
   'http://localhost:5174',
   'http://localhost:3001/',
