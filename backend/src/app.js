@@ -18,12 +18,39 @@ const fileUpload = require('express-fileupload');
 // create our Express app
 const app = express();
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
+// Enable CORS
+const whitelist = [
+  'http://crm.marketingpro.com.hk',
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'http://localhost:3001/',
+  'localhost:5173',
+  'localhost:5174',
+  'localhost:3000',
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      // console.log(origin);
+      callback(new Error('Please Contact Admin!'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
+// app.use(
+//   cors({
+//     origin: true,
+//     credentials: true,
+//   })
+// );
 
 app.use(cookieParser());
 app.use(express.json());
